@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DagingKu — Cek Kualitas Daging Secara Instan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" type="image/x-icon" href="./logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FFF3F0;
+    --card: #FFFFFF;
+    --primary: #FC4524;
+    --primary-deep: #3A1B14;
+    --accent-soft: #FFD5CC;
+    --ink: #2C1810;
+    --ink-muted: #9E5A50;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3{ font-family:'Sora', sans-serif; margin:0; }
+
+  .wrap{ max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Nav ---------- */
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:24px; padding-bottom:24px;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .logo-badge{
+    height:38px; border-radius:11px;
+    box-shadow: 0 8px 18px -10px rgba(0,0,0,0.3);
+  }
+  .brand-name{ font-family:'Sora',sans-serif; font-weight:800; font-size:17px; color:var(--primary-deep); }
+  .nav-btn{
+    background:var(--card); color:var(--ink); text-decoration:none;
+    padding:10px 18px; border-radius:12px; font-size:13.5px; font-weight:600;
+    box-shadow: 0 10px 24px -14px rgba(0,0,0,0.25);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding: 48px 24px 20px; text-align:center; }
+  .eyebrow{
+    display:inline-block; font-size:12.5px; font-weight:600; color:var(--primary);
+    background:var(--accent-soft); padding:6px 14px; border-radius:999px; margin-bottom:22px;
+  }
+  .hero h1{
+    font-size: clamp(30px, 5.5vw, 48px); font-weight:800; line-height:1.15; letter-spacing:-0.5px;
+    max-width: 720px; margin: 0 auto 18px;
+  }
+  .hero h1 span{ color:var(--primary); }
+  .hero p{
+    font-size:16px; line-height:1.65; color:var(--ink-muted); max-width:560px; margin:0 auto 34px;
+  }
+  .cta-row{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:16px; }
+  .btn-primary{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--primary); color:#FFFFFF; font-weight:700; font-size:15px;
+    padding:15px 26px; border-radius:14px; text-decoration:none;
+    box-shadow: 0 0 44px -8px rgba(252,69,36,0.55), 0 20px 30px -18px rgba(0,0,0,0.3);
+  }
+  .btn-ghost{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--card); color:var(--ink); font-weight:600; font-size:15px;
+    padding:15px 24px; border-radius:14px; text-decoration:none;
+    box-shadow: 0 10px 24px -14px rgba(0,0,0,0.2);
+  }
+  .hero-note{ font-size:12.5px; color:var(--ink-muted); }
+
+  /* ---------- Section heading ---------- */
+  .section{ padding: 64px 24px; }
+  .section-head{ text-align:center; max-width:560px; margin:0 auto 40px; }
+  .section-head h2{ font-size: clamp(24px,3.5vw,32px); font-weight:800; margin-bottom:12px; }
+  .section-head p{ color:var(--ink-muted); font-size:15px; line-height:1.6; }
+
+  /* ---------- Benefit cards ---------- */
+  .grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap:18px; max-width:900px; margin:0 auto; }
+  @media (max-width:640px){ .grid{ grid-template-columns:1fr; } }
+  .card{
+    background:var(--card); border-radius:20px; padding:26px;
+    box-shadow: 0 24px 48px -28px rgba(0,0,0,0.18);
+  }
+  .icon-wrap{
+    width:46px; height:46px; border-radius:13px; background:var(--accent-soft);
+    display:flex; align-items:center; justify-content:center; margin-bottom:16px;
+  }
+  .icon-wrap svg{ width:22px; height:22px; stroke:var(--primary); }
+  .card h3{ font-size:16.5px; font-weight:700; margin-bottom:8px; }
+  .card p{ font-size:13.5px; line-height:1.6; color:var(--ink-muted); margin:0; }
+
+  /* ---------- Install steps ---------- */
+  .steps{ max-width:640px; margin:0 auto; display:flex; flex-direction:column; gap:14px; }
+  .step{
+    display:flex; gap:16px; align-items:flex-start; background:var(--card);
+    border-radius:16px; padding:18px 20px;
+    box-shadow: 0 18px 36px -24px rgba(0,0,0,0.18);
+  }
+  .step-num{
+    width:30px; height:30px; border-radius:9px; background:var(--accent-soft); color:var(--primary);
+    font-family:'Sora',sans-serif; font-weight:700; font-size:14px;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .step h4{ font-size:14.5px; font-weight:700; margin-bottom:4px; }
+  .step p{ font-size:13px; line-height:1.55; color:var(--ink-muted); margin:0; }
+
+  /* ---------- Final CTA ---------- */
+  .final-cta{
+    text-align:center; background:var(--primary-deep); border-radius:28px; padding:48px 24px;
+    max-width:900px; margin:0 auto; box-shadow: 0 30px 60px -30px rgba(0,0,0,0.4);
+  }
+  .final-cta h2{ font-size:clamp(22px,3.5vw,28px); margin-bottom:12px; color:#FFFFFF; }
+  .final-cta p{ color:#FFD5CC; font-size:14.5px; margin-bottom:26px; }
+  .final-cta .btn-primary{ background:#FFFFFF; color:var(--primary-deep); }
+  .final-cta .btn-primary svg{ stroke:var(--primary-deep) !important; }
+
+  footer{ text-align:center; padding:36px 24px 48px; color:var(--ink-muted); font-size:12.5px; }
+</style>
+</head>
+<body>
+
+  <nav class="wrap">
+    <div class="brand">
+      <img class="logo-badge" src="./logo.png" alt="Logo Universitas">
+      <!-- <img class="logo-badge" src="https://placehold.co/76x76/3A1B14/FFFFFF?text=P2MW" alt="Logo P2MW"> -->
+      <span class="brand-name">DagingKu</span>
+    </div>
+    <a class="nav-btn" href="#unduh">Unduh Aplikasi</a>
+  </nav>
+
+  <header class="hero">
+    <span class="eyebrow">Untuk Daging Sapi, Kambing &amp; Babi</span>
+    <h1>Cek kesegaran daging <span>dalam hitungan detik</span></h1>
+    <p>DagingKu memindai foto daging dan langsung memberi tahu tingkat kesegarannya — bantu kamu memilih daging yang masih layak sebelum dimasak.</p>
+    <div class="cta-row">
+      <a class="btn-primary" href="#">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="M6 11l6 6 6-6"/><path d="M5 21h14"/></svg>
+        Unduh DagingKu (.apk)
+      </a>
+      <a class="btn-ghost" href="#manfaat">Lihat Manfaatnya</a>
+    </div>
+    <div class="hero-note">Gratis &middot; Android &middot; Bisa dipakai tanpa koneksi internet saat memindai</div>
+  </header>
+
+  <section class="section" id="manfaat">
+    <div class="section-head">
+      <h2>Kenapa pakai DagingKu?</h2>
+      <p>Dirancang supaya siapa saja bisa langsung pakai, dari pasar sampai ke dapur.</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>
+        </div>
+        <h3>Hasil Instan</h3>
+        <p>Cukup foto dagingnya, hasil analisis kesegaran langsung keluar dalam hitungan detik — untuk daging sapi, kambing, dan babi.</p>
+      </div>
+      <div class="card">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+        </div>
+        <h3>Kualitas Lebih Terjamin</h3>
+        <p>Bantu kenali daging yang masih segar dan yang sudah tidak layak, sebelum dibeli atau sebelum dimasak.</p>
+      </div>
+      <div class="card">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20a8 8 0 100-16 8 8 0 000 16z"/><path d="M12 8v4l3 2"/></svg>
+        </div>
+        <h3>Tetap Jalan di Pasar</h3>
+        <p>Model AI berjalan langsung di perangkat, jadi tetap bisa dipakai memindai walau sinyal internet terbatas.</p>
+      </div>
+      <div class="card">
+        <div class="icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M20 8v4M22 10h-4"/></svg>
+        </div>
+        <h3>Mudah Dipakai Siapa Saja</h3>
+        <p>Alur pemakaiannya sederhana dan dipandu langkah demi langkah, nyaman dipakai siapa saja.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="unduh">
+    <div class="section-head">
+      <h2>Cara memasang DagingKu</h2>
+      <p>Berkas .apk diunduh langsung, bukan lewat Play Store — ikuti 3 langkah ini.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <h4>Izinkan instalasi dari sumber tidak dikenal</h4>
+          <p>Buka Pengaturan &gt; Keamanan di HP Android kamu, lalu aktifkan izin instal aplikasi dari luar Play Store.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <h4>Unduh berkas DagingKu.apk</h4>
+          <p>Tekan tombol unduh di atas, tunggu sampai berkas selesai terunduh ke HP kamu.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <h4>Buka dan pasang</h4>
+          <p>Buka berkas yang sudah diunduh dari notifikasi atau folder Download, lalu ketuk "Pasang".</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="final-cta">
+      <h2>Siap dipakai hari ini</h2>
+      <p>Gratis diunduh, langsung bisa dipakai memindai kesegaran daging sapi, kambing, dan babi.</p>
+      <a class="btn-primary" href="#">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="M6 11l6 6 6-6"/><path d="M5 21h14"/></svg>
+        Unduh DagingKu (.apk)
+      </a>
+    </div>
+  </section>
+
+  <footer>&copy; 2026 DagingKu. Sistem Cek Kualitas Daging.</footer>
+
+</body>
+</html>
